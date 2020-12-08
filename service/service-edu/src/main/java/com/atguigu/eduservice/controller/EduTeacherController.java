@@ -4,10 +4,9 @@ package com.atguigu.eduservice.controller;
 import com.atguigu.eduservice.entity.EduTeacher;
 import com.atguigu.eduservice.service.EduTeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 /**
@@ -28,8 +27,13 @@ public class EduTeacherController {
     @GetMapping
     public List<EduTeacher> query() {
         List<EduTeacher> list = eduTeacherService.list(null);
-        System.out.println(list);
         return list;
+    }
+
+    @DeleteMapping("{id}")
+    public boolean deleteTeacherById(@PathVariable("id") String id) {
+        boolean b = eduTeacherService.removeById(id);
+        return b;
     }
 
 }
