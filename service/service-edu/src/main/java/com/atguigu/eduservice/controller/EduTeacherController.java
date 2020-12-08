@@ -1,8 +1,11 @@
 package com.atguigu.eduservice.controller;
 
 
+import com.atguigu.commonutils.R;
 import com.atguigu.eduservice.entity.EduTeacher;
 import com.atguigu.eduservice.service.EduTeacherService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,10 +29,11 @@ public class EduTeacherController {
     EduTeacherService eduTeacherService;
 
     @GetMapping
-    public List<EduTeacher> query() {
+    @ApiOperation(value = "查询所有老师")
+    public R query() {
         List<EduTeacher> list = eduTeacherService.list(null);
         System.out.println(list);
-        return list;
+        return R.ok().data("item",list);
     }
 
 }

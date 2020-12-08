@@ -11,6 +11,27 @@
 
     <groupId>com.atguigu</groupId>
     <artifactId>common</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>service-base</module>
+        <module>common-utils</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+        </dependency>
+
+    </dependencies>
 
 
 </project>
