@@ -6,10 +6,13 @@ import com.atguigu.eduservice.entity.EduTeacher;
 import com.atguigu.eduservice.service.EduTeacherService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -36,10 +39,64 @@ public class EduTeacherController {
     }
 
     @DeleteMapping("{id}")
-    public boolean deleteTeacherById(@PathVariable("id") String id) {
+    public R deleteTeacherById(@PathVariable("id") String id) {
         boolean b = eduTeacherService.removeById(id);
         System.out.println("=====================");
-        return b;
+        if (b) {
+            return R.ok();
+        }else {
+            return R.error();
+        }
+    }
+
+    @GetMapping("{page}/{limit}")
+    @ApiOperation(value = "分页老师列表")
+    public R pageList(
+            @ApiParam(name = "page",value = "当前页",required = true)
+            @PathVariable("page") Long page,
+            @ApiParam(name = "limit",value = "每页数",required = true)
+            @PathVariable("limit") Long limit) {
+        HashMap<String,Object> pageResult = this.eduTeacherService.pageList(page,limit);
+
+        return R.ok().data(pageResult);
+    }
+
+
+    @ApiOperation(value = "新增讲师")
+    @PostMapping
+    @Transactional
+    public R save(@ApiParam(name = "eduteacher",value = "讲师对象",required = true) @RequestBody EduTeacher eduTeacher) {
+        boolean save = this.eduTeacherService.save(eduTeacher);
+        if (save) {
+            return R.ok();
+        }else {
+            return R.error();
+        }
+    }
+
+    @ApiOperation(value = "通过id查询讲师")
+    @GetMapping("{id}")
+    public R queryTeacherById( @PathVariable("id") String id) {
+        EduTeacher eduTeacher = this.eduTeacherService.getById(id);
+
+        if (eduTeacher == null) {
+            return R.error().message("没找到");
+        }else {
+            return R.ok().data("item", eduTeacher);
+        }
+    }
+
+    @ApiOperation(value = "通过id修改教师")
+    @PutMapping("{id}")
+    public R updataTeacherById(@PathVariable("id") String id,@RequestBody EduTeacher eduTeacher) {
+        eduTeacher.setId(id);
+        boolean b = this.eduTeacherService.updateById(eduTeacher);
+        if (b) {
+            return R.ok();
+        }else {
+            return R.error();
+        }
+
     }
 }
 

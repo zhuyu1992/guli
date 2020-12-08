@@ -19,7 +19,7 @@ public class MyMetaObject implements MetaObjectHandler {
         this.setFieldValByName("gmtCreate", new Date(), metaObject);
         this.setFieldValByName("gmtModified", new Date(), metaObject);
 
-        this.setFieldValByName("isDeleted",0,metaObject);
+        this.setFieldValByName("isDeleted",false,metaObject);
     }
 
     @Override
