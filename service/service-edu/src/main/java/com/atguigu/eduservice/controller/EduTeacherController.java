@@ -38,8 +38,8 @@ public class EduTeacherController {
     @DeleteMapping("{id}")
     public boolean deleteTeacherById(@PathVariable("id") String id) {
         boolean b = eduTeacherService.removeById(id);
+        System.out.println("=====================");
         return b;
     }
-
 }
 
