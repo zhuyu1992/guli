@@ -4,6 +4,7 @@ package com.atguigu.eduservice.controller;
 import com.atguigu.commonutils.R;
 import com.atguigu.eduservice.entity.EduTeacher;
 import com.atguigu.eduservice.service.EduTeacherService;
+import com.atguigu.servicebase.config.GuliException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -78,7 +79,12 @@ public class EduTeacherController {
     @GetMapping("{id}")
     public R queryTeacherById( @PathVariable("id") String id) {
         EduTeacher eduTeacher = this.eduTeacherService.getById(id);
+        try {
+            int i=1/0;
+        } catch (Exception e) {
 
+            throw new GuliException(2009,"错误,自定义异常");
+        }
         if (eduTeacher == null) {
             return R.error().message("没找到");
         }else {
