@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
@@ -45,5 +46,11 @@ public class EduTeacherServiceImpl extends ServiceImpl<EduTeacherMapper, EduTeac
         hashMap.put("total",total);
         hashMap.put("rows",records);
         return hashMap;
+    }
+
+    @Override
+    public boolean removeById(Serializable id) {
+        Integer result = baseMapper.deleteById(id);
+        return null != result && result > 0;
     }
 }

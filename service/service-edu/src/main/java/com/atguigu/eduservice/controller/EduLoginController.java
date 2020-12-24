@@ -1,6 +1,7 @@
 package com.atguigu.eduservice.controller;
 
 import com.atguigu.commonutils.R;
+import com.atguigu.servicebase.config.GuliException;
 import org.springframework.web.bind.annotation.*;
 
 /**

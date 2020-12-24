@@ -3,6 +3,7 @@ package com.atguigu.eduservice.service;
 import com.atguigu.eduservice.entity.EduTeacher;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**
@@ -16,4 +17,7 @@ import java.util.HashMap;
 public interface EduTeacherService extends IService<EduTeacher> {
 
     HashMap<String, Object> pageList(Long page, Long limit);
+
+    @Override
+    boolean removeById(Serializable id);
 }

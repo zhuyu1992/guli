@@ -41,13 +41,14 @@ public class EduTeacherController {
     }
 
     @DeleteMapping("{id}")
+    @ApiOperation(value = "删除老师通过id")
     public R deleteTeacherById(@PathVariable("id") String id) {
         boolean b = eduTeacherService.removeById(id);
         System.out.println("=====================");
         if (b) {
             return R.ok();
         }else {
-            return R.error();
+            return R.error().message("删除失败");
         }
     }
 
